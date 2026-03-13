@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shield & Secure Insurance | Life, Mortgage, Income & Final Expense</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --navy:   #0a1628;
+  --deep:   #0d1f3c;
+  --gold:   #c9a84c;
+  --goldlt: #e8c97a;
+  --white:  #ffffff;
+  --muted:  rgba(255,255,255,0.55);
+  --border: rgba(201,168,76,0.25);
+  --card:   rgba(255,255,255,0.04);
+}
+
+body { background: var(--navy); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; line-height: 1.6; }
+
+/* NAV */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 5%;
+  background: rgba(10,22,40,0.93); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--gold); }
+.logo b { color: #fff; }
+nav { display: flex; gap: 2rem; align-items: center; }
+nav a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: .85rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+nav a:hover { color: var(--gold); }
+.nav-btn { background: var(--gold); color: var(--navy) !important; padding: .55rem 1.4rem; border-radius: 2px; font-weight: 700 !important; }
+.nav-btn:hover { background: var(--goldlt) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+.mob-nav { display: none; flex-direction: column; position: fixed; top: 62px; left: 0; right: 0; z-index: 190; background: rgba(10,22,40,.97); border-bottom: 1px solid var(--border); padding: 1rem 5%; }
+.mob-nav.open { display: flex; }
+.mob-nav a { color: rgba(255,255,255,.75); text-decoration: none; padding: .85rem 0; font-size: .95rem; border-bottom: 1px solid rgba(255,255,255,.06); }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 9rem 5% 5rem; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 60%, #0a1628 100%); }
+.hero-glow { position: absolute; top: 15%; right: 5%; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,.1) 0%, transparent 70%); pointer-events: none; }
+.hero-grid { position: absolute; inset: 0; opacity: .035; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 55px 55px; }
+.hero-inner { position: relative; z-index: 2; max-width: 680px; }
+.badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(201,168,76,.1); border: 1px solid var(--border); padding: .35rem 1rem; border-radius: 100px; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; }
+.bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem,6vw,5.2rem); font-weight: 900; line-height: 1.02; margin-bottom: 1.4rem; letter-spacing: -.02em; }
+.hero p { font-size: 1.05rem; color: var(--muted); font-weight: 300; max-width: 510px; margin-bottom: 2.4rem; }
+.btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { display: inline-block; padding: .95rem 2rem; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all .2s; border: none; }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-gold:hover { background: var(--goldlt); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.3); }
+.btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.25); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.hero-stats { display: flex; gap: 1.2rem; margin-top: 3.5rem; flex-wrap: wrap; position: relative; z-index: 2; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.1rem 1.6rem; }
+.stat-n { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.stat-l { font-size: .72rem; color: rgba(255,255,255,.42); text-transform: uppercase; letter-spacing: .07em; margin-top: .3rem; }
+
+/* TRUST */
+.trust { background: rgba(201,168,76,.05); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.2rem 5%; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+.ti { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: rgba(255,255,255,.48); text-transform: uppercase; letter-spacing: .06em; }
+.ti span:first-child { color: var(--gold); }
+
+/* SECTIONS */
+section { padding: 5.5rem 5%; }
+.sec-label { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+.sec-sub { color: var(--muted); font-size: .98rem; font-weight: 300; max-width: 560px; }
+
+/* PRODUCTS */
+.products-sec { background: var(--deep); }
+.ph { text-align: center; margin-bottom: 3.5rem; }
+.ph .sec-sub { margin: 0 auto; }
+.pgrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.pc { background: var(--deep); padding: 2.4rem 2rem; position: relative; overflow: hidden; transition: background .3s; }
+.pc::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
+.pc:hover { background: rgba(201,168,76,.05); }
+.pc:hover::after { transform: scaleX(1); }
+.pc-icon { width: 46px; height: 46px; border-radius: 4px; background: rgba(201,168,76,.1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 1.4rem; }
+.pc h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .75rem; }
+.pc p { color: var(--muted); font-size: .86rem; line-height: 1.65; font-weight: 300; margin-bottom: 1.3rem; }
+.pc ul { list-style: none; display: flex; flex-direction: column; gap: .42rem; margin-bottom: 1.4rem; }
+.pc ul li { font-size: .8rem; color: rgba(255,255,255,.58); display: flex; align-items: flex-start; gap: .48rem; }
+.pc ul li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.pc-link { color: var(--gold); font-size: .8rem; font-weight: 500; text-decoration: none; letter-spacing: .04em; }
+
+/* WHY */
+.why-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.wc { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.7rem 1.4rem; transition: border-color .3s, transform .3s; }
+.wc:hover { border-color: var(--gold); transform: translateY(-4px); }
+.wc-icon { font-size: 1.55rem; margin-bottom: .65rem; }
+.wc h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: .38rem; }
+.wc p { color: var(--muted); font-size: .8rem; line-height: 1.55; font-weight: 300; }
+
+/* PROCESS */
+.proc-sec { background: var(--deep); text-align: center; }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; margin-top: 3.5rem; position: relative; }
+.steps::before { content: ''; position: absolute; top: 1.35rem; left: calc(12.5% + 1rem); right: calc(12.5% + 1rem); height: 1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); opacity: .3; }
+.snum { width: 2.7rem; height: 2.7rem; border-radius: 50%; border: 1px solid var(--gold); background: var(--deep); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-family: 'Playfair Display', serif; font-size: .9rem; font-weight: 700; color: var(--gold); position: relative; z-index: 1; }
+.step h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: .55rem; }
+.step p { color: var(--muted); font-size: .83rem; line-height: 1.6; font-weight: 300; }
+
+/* TESTIMONIALS */
+.tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.tc { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2.2rem; position: relative; transition: border-color .3s; }
+.tc:hover { border-color: var(--gold); }
+.tc::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold); opacity: .14; position: absolute; top: .7rem; left: 1.2rem; line-height: 1; }
+.tc p { color: rgba(255,255,255,.7); font-size: .9rem; line-height: 1.7; font-weight: 300; padding-top: 1rem; margin-bottom: 1.3rem; }
+.ta { display: flex; align-items: center; gap: .7rem; }
+.av { width: 36px; height: 36px; border-radius: 50%; background: rgba(201,168,76,.18); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+.an { font-weight: 600; font-size: .83rem; }
+.ar { font-size: .73rem; color: rgba(255,255,255,.38); }
+
+/* CONTACT */
+.contact-sec { background: linear-gradient(135deg,rgba(201,168,76,.08) 0%,rgba(201,168,76,.02) 100%); border-top: 1px solid var(--border); text-align: center; }
+.cbtn-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+
+/* FORM */
+.fwrap { max-width: 680px; margin: 0 auto; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 6px; padding: 2.8rem; text-align: left; }
+.fwrap h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; margin-bottom: .4rem; }
+.fsub-label { color: var(--muted); font-size: .83rem; font-weight: 300; margin-bottom: 2rem; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-bottom: 1.1rem; }
+.fg { display: flex; flex-direction: column; gap: .36rem; }
+.fg.full { margin-bottom: 1.1rem; }
+.fg label { font-size: .76rem; font-weight: 500; color: rgba(255,255,255,.62); text-transform: uppercase; letter-spacing: .05em; }
+.fg label .req { color: var(--gold); }
+.fg input, .fg select, .fg textarea { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 3px; padding: .78rem .95rem; color: #fff; font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 300; transition: border-color .2s, background .2s; width: 100%; outline: none; }
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,.2); }
+.fg select option { background: #0d1f3c; }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); background: rgba(201,168,76,.05); }
+.fg input.err, .fg select.err { border-color: #ff6b6b; }
+.fg textarea { resize: vertical; min-height: 85px; }
+.fg input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5) sepia(1) saturate(2); cursor: pointer; }
+.checks { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.chk { display: flex; align-items: center; gap: .52rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 3px; padding: .62rem .88rem; font-size: .84rem; color: rgba(255,255,255,.62); cursor: pointer; transition: border-color .2s, background .2s; font-weight: 400; }
+.chk:hover { border-color: var(--gold); background: rgba(201,168,76,.07); }
+.chk input { accent-color: var(--gold); width: 14px; height: 14px; cursor: pointer; }
+.chk:has(input:checked) { border-color: var(--gold); background: rgba(201,168,76,.12); color: #fff; }
+.ferr { display: none; color: #ff8080; font-size: .81rem; background: rgba(255,100,100,.08); border: 1px solid rgba(255,100,100,.25); border-radius: 3px; padding: .7rem 1rem; margin-bottom: 1rem; }
+.fsubmit { width: 100%; padding: 1.05rem; font-size: .93rem; background: var(--gold); color: var(--navy); border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: .04em; cursor: pointer; transition: background .2s, transform .2s; }
+.fsubmit:hover { background: var(--goldlt); transform: translateY(-2px); }
+.fsubmit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.privacy-note { color: rgba(255,255,255,.26); font-size: .72rem; text-align: center; margin-top: .9rem; font-weight: 300; }
+.success-box { display: none; text-align: center; padding: 2.5rem 1rem; }
+.success-box .icon { font-size: 2.8rem; margin-bottom: .8rem; }
+.success-box h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; margin-bottom: .6rem; }
+.success-box p { color: var(--muted); font-weight: 300; }
+
+/* FOOTER */
+footer { background: #060f1e; padding: 3.5rem 5%; border-top: 1px solid var(--border); }
+.fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+.fbrand p { color: rgba(255,255,255,.36); font-size: .82rem; line-height: 1.6; margin-top: .9rem; font-weight: 300; }
+.fcol h5 { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.fcol ul { list-style: none; display: flex; flex-direction: column; gap: .52rem; }
+.fcol a { color: rgba(255,255,255,.36); text-decoration: none; font-size: .83rem; transition: color .2s; }
+.fcol a:hover { color: #fff; }
+.fbot { border-top: 1px solid rgba(255,255,255,.06); padding-top: 1.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.fbot p { color: rgba(255,255,255,.22); font-size: .76rem; }
+.flinks { display: flex; gap: 1.5rem; }
+.flinks a { color: rgba(255,255,255,.22); text-decoration: none; font-size: .74rem; }
+.flinks a:hover { color: rgba(255,255,255,.5); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.up { opacity: 1; transform: none; }
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .pgrid{grid-template-columns:1fr 1fr}
+  .why-wrap{grid-template-columns:1fr;gap:3rem}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps::before{display:none}
+  .tgrid{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  nav{display:none}
+  .hamburger{display:flex}
+  .pgrid{grid-template-columns:1fr}
+  .wgrid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .fwrap{padding:2rem 1.4rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Shield<b>&</b>Secure</div>
+  <nav>
+    <a href="#products">Coverage</a>
+    <a href="#why">About</a>
+    <a href="#process">How It Works</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact" class="nav-btn">Get a Quote</a>
+  </nav>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobnav">
+  <a href="#products" onclick="closeMob()">Coverage</a>
+  <a href="#why" onclick="closeMob()">About</a>
+  <a href="#process" onclick="closeMob()">How It Works</a>
+  <a href="#testimonials" onclick="closeMob()">Reviews</a>
+  <a href="#contact" onclick="closeMob()">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="badge"><span class="bdot"></span>Trusted Protection — Licensed All 50 States</div>
+    <h1>Your Family<br>Deserves<br><em style="color:var(--gold);font-style:italic">Certainty.</em></h1>
+    <p>Life insurance, mortgage protection, income replacement, and final expense coverage — tailored to your life and your peace of mind.</p>
+    <div class="btn-row">
+      <a href="#contact" class="btn btn-gold">Get My Free Quote</a>
+      <a href="#products" class="btn btn-outline">Explore Coverage →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">18K+</div><div class="stat-l">Families Protected</div></div>
+    <div class="stat"><div class="stat-n">$2B+</div><div class="stat-l">Coverage Written</div></div>
+    <div class="stat"><div class="stat-n">97%</div><div class="stat-l">Claims Paid</div></div>
+    <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Carrier Partners</div></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="ti"><span>🛡</span><span>A+ AM Best Rated</span></div>
+  <div class="ti"><span>✓</span><span>Licensed All 50 States</span></div>
+  <div class="ti"><span>⚡</span><span>Same-Day Approval</span></div>
+  <div class="ti"><span>🔒</span><span>No Medical Exam Options</span></div>
+  <div class="ti"><span>📞</span><span>24/7 Claims Support</span></div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-sec" id="products">
+  <div class="ph reveal">
+    <div class="sec-label">Our Coverage Plans</div>
+    <h2 class="sec-title">Protection Built Around You</h2>
+    <p class="sec-sub">Every plan is designed to shield what matters most — from growing families to retirement and beyond.</p>
+  </div>
+  <div class="pgrid">
+    <div class="pc reveal d1">
+      <div class="pc-icon">❤️</div>
+      <h3>Life Insurance</h3>
+      <p>Financial security for the people you love most. Term or permanent — we build a plan around your exact situation.</p>
+      <ul>
+        <li>Term life from 10–30 years</li>
+        <li>Whole &amp; universal life options</li>
+        <li>Coverage from $50K to $5M+</li>
+        <li>Living benefit riders available</li>
+        <li>No medical exam up to $1M</li>
+      </ul>
+      <a href="#contact" class="pc-link">Get a Quote →</a>
+    </div>
+    <div class="pc reveal d2">
+      <div class="pc-icon">🏠</div>
+      <h3>Mortgage Protection</h3>
+      <p>Keep your family in their home no matter what. Specialized coverage ensures your mortgage is paid if you can't.</p>
+      <ul>
+        <li>Matches your loan balance exactly</li>
+        <li>Covers death, disability &amp; illness</li>
+        <li>Lump-sum or monthly benefit</li>
+        <li>Return of premium available</li>
+        <li>Fast approval — often same week</li>
+      </ul>
+      <a href="#contact" class="pc-link">Get a Quote →</a>
+    </div>
+    <div class="pc reveal d3">
+      <div class="pc-icon">💼</div>
+      <h3>Income Replacement</h3>
+      <p>Your paycheck is your family's lifeline. Disability coverage steps in so your bills don't miss a beat.</p>
+      <ul>
+        <li>Up to 70% of monthly income</li>
+        <li>Short-term &amp; long-term plans</li>
+        <li>Own-occupation definitions</li>
+        <li>Benefits up to age 65</li>
+        <li>Self-employed friendly options</li>
+      </ul>
+      <a href="#contact" class="pc-link">Get a Quote →</a>
+    </div>
+    <div class="pc reveal d4">
+      <div class="pc-icon">🕊️</div>
+      <h3>Final Expense</h3>
+      <p>Give your loved ones closure without financial burden. Affordable whole life plans covering end-of-life costs.</p>
+      <ul>
+        <li>Coverage from $2,500–$50,000</li>
+        <li>Guaranteed acceptance options</li>
+        <li>Premiums never increase</li>
+        <li>Benefits never decrease</li>
+        <li>Immediate payout, no waiting</li>
+      </ul>
+      <a href="#contact" class="pc-link">Get a Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-wrap">
+    <div class="reveal">
+      <div class="sec-label">Why Shield &amp; Secure</div>
+      <h2 class="sec-title">We Don't Sell Policies.<br>We Build <em style="color:var(--gold);font-style:italic">Trust.</em></h2>
+      <p class="sec-sub">Unlike captive agents tied to one company, we shop dozens of top-rated carriers to find coverage that genuinely fits your life — not our commission structure.</p>
+      <br><br>
+      <a href="#contact" class="btn btn-gold">Talk to an Advisor</a>
+    </div>
+    <div class="wgrid">
+      <div class="wc reveal d1"><div class="wc-icon">🎯</div><h4>Independent Agents</h4><p>We represent you, not any single carrier.</p></div>
+      <div class="wc reveal d2"><div class="wc-icon">⚡</div><h4>Fast Approvals</h4><p>Many clients approved within 24–48 hours.</p></div>
+      <div class="wc reveal d3"><div class="wc-icon">🔍</div><h4>Carrier Shopping</h4><p>We compare 20+ top-rated companies for you.</p></div>
+      <div class="wc reveal d4"><div class="wc-icon">🤝</div><h4>Lifetime Support</h4><p>We're here long after the policy is signed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc-sec" id="process">
+  <div class="reveal">
+    <div class="sec-label">How It Works</div>
+    <h2 class="sec-title">Coverage in Four Simple Steps</h2>
+    <p class="sec-sub" style="margin:0 auto">From first conversation to full protection — we make it effortless.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal d1"><div class="snum">01</div><h4>Free Consultation</h4><p>Tell us about your family, finances, and goals. No pressure, no obligation.</p></div>
+    <div class="step reveal d2"><div class="snum">02</div><h4>Personalized Quotes</h4><p>We shop multiple carriers and present clear options with no hidden fees.</p></div>
+    <div class="step reveal d3"><div class="snum">03</div><h4>Easy Application</h4><p>Apply online or by phone. Many plans require no medical exam at all.</p></div>
+    <div class="step reveal d4"><div class="snum">04</div><h4>Full Protection</h4><p>Get your policy and rest easy. We follow up every year to keep you covered.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal" style="text-align:center">
+    <div class="sec-label">Client Stories</div>
+    <h2 class="sec-title">Real Families, Real Peace of Mind</h2>
+  </div>
+  <div class="tgrid">
+    <div class="tc reveal d1">
+      <p>After my husband's diagnosis, I panicked about the mortgage. Our advisor had us set up with mortgage protection within a week. That policy saved our home — literally.</p>
+      <div class="ta"><div class="av">👩</div><div><div class="an">Maria T.</div><div class="ar">Homeowner, Florida</div></div></div>
+    </div>
+    <div class="tc reveal d2">
+      <p>I'm self-employed and always worried about what would happen if I got injured. The income replacement plan gives me real confidence to keep building my business.</p>
+      <div class="ta"><div class="av">👨</div><div><div class="an">Derek S.</div><div class="ar">Small Business Owner, Texas</div></div></div>
+    </div>
+    <div class="tc reveal d3">
+      <p>My mom's final expense plan covered everything when she passed. Our family could focus on grieving together instead of scrambling for money. Worth every penny.</p>
+      <div class="ta"><div class="av">👩‍🦱</div><div><div class="an">Renee K.</div><div class="ar">Client's Daughter, Georgia</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="sec-label reveal">Get In Touch</div>
+  <h2 class="sec-title reveal">Start Protecting What Matters <em style="color:var(--gold);font-style:italic">Today.</em></h2>
+  <p class="sec-sub reveal" style="margin:0 auto 1.4rem">Fill out the form and an advisor will reach out within 24 hours — no cost, no obligation.</p>
+  <div class="cbtn-row reveal">
+    <a href="tel:+18436333464" class="btn btn-gold">📞 (843) 633-3464</a>
+    <a href="mailto:homebride.foundation@outlook.com" class="btn btn-outline">✉️ Email Us</a>
+  </div>
+
+  <div class="fwrap reveal">
+    <div class="sec-label">Free Quote Request</div>
+    <h3>Tell Us About Yourself</h3>
+    <p class="fsub-label">We'll match you with the best coverage for your situation.</p>
+
+    <div class="success-box" id="successbox">
+      <div class="icon">✅</div>
+      <h3>Message Received!</h3>
+      <p>An advisor will be in touch within 24 hours.</p>
+    </div>
+
+    <form id="qform" novalidate>
+      <input type="hidden" name="_subject" value="New Insurance Quote Request 🛡️">
+      <div class="frow">
+        <div class="fg"><label>First Name <span class="req">*</span></label><input type="text" name="firstName" placeholder="John" required></div>
+        <div class="fg"><label>Last Name <span class="req">*</span></label><input type="text" name="lastName" placeholder="Smith" required></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 000-0000" required></div>
+        <div class="fg"><label>Email Address <span class="req">*</span></label><input type="email" name="email" placeholder="you@example.com" required></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Date of Birth</label><input type="date" name="dob"></div>
+        <div class="fg">
+          <label>State</label>
+          <select name="state">
+            <option value="">Select your state…</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+            <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+            <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+            <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+            <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+            <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+            <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+            <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+            <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg full">
+        <label>Coverage Interest <span class="req">*</span></label>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" name="coverage" value="Life Insurance"> ❤️ Life Insurance</label>
+          <label class="chk"><input type="checkbox" name="coverage" value="Mortgage Protection"> 🏠 Mortgage Protection</label>
+          <label class="chk"><input type="checkbox" name="coverage" value="Income Replacement"> 💼 Income Replacement</label>
+          <label class="chk"><input type="checkbox" name="coverage" value="Final Expense"> 🕊️ Final Expense</label>
+        </div>
+      </div>
+      <div class="fg full">
+        <label>Additional Notes</label>
+        <textarea name="notes" placeholder="Any questions, health conditions, or details you'd like us to know…"></textarea>
+      </div>
+      <div class="ferr" id="ferr"></div>
+      <button type="submit" class="fsubmit" id="fsub">Request My Free Quote →</button>
+      <p class="privacy-note">🔒 Your information is private and never shared or sold.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div class="fbrand">
+      <div class="logo">Shield<b>&</b>Secure</div>
+      <p>Independent insurance advisors helping American families protect what they love. Licensed in all 50 states. Representing 20+ top-rated carriers.</p>
+    </div>
+    <div class="fcol">
+      <h5>Coverage</h5>
+      <ul>
+        <li><a href="#products">Life Insurance</a></li>
+        <li><a href="#products">Mortgage Protection</a></li>
+        <li><a href="#products">Income Replacement</a></li>
+        <li><a href="#products">Final Expense</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#testimonials">Client Stories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+18436333464">(843) 633-3464</a></li>
+        <li><a href="mailto:homebride.foundation@outlook.com">homebride.foundation@outlook.com</a></li>
+        <li><a href="#contact">Get a Free Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 Shield &amp; Secure Insurance. All rights reserved.</p>
+    <div class="flinks">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Licenses</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mobnav').classList.toggle('open'));
+function closeMob(){document.getElementById('mobnav').classList.remove('open');}
+
+// Scroll reveal
+new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up');}),{threshold:.1})
+  .observe||document.querySelectorAll('.reveal').forEach(el=>{
+    new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('up');},{threshold:.1}).observe(el);
+  });
+document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('up');},{threshold:.1}).observe(el);
+});
+
+// Phone format
+document.querySelector('input[name="phone"]').addEventListener('input',e=>{
+  let v=e.target.value.replace(/\D/g,'').slice(0,10);
+  if(v.length>=6)v=`(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+  else if(v.length>=3)v=`(${v.slice(0,3)}) ${v.slice(3)}`;
+  e.target.value=v;
+});
+
+// Form → Formspree
+const form=document.getElementById('qform');
+const ferr=document.getElementById('ferr');
+const fsub=document.getElementById('fsub');
+const successbox=document.getElementById('successbox');
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  ferr.style.display='none';
+  let ok=true;
+  form.querySelectorAll('[required]').forEach(el=>{
+    el.classList.remove('err');
+    if(!el.value.trim()){el.classList.add('err');ok=false;}
+  });
+  const em=form.querySelector('input[name="email"]');
+  if(em.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){em.classList.add('err');ok=false;}
+  if(!ok){ferr.textContent='Please fill in all required fields correctly.';ferr.style.display='block';return;}
+
+  fsub.textContent='Sending…';fsub.disabled=true;
+
+  const fd=new FormData(form);
+  const checked=[...form.querySelectorAll('input[name="coverage"]:checked')].map(c=>c.value).join(', ');
+  fd.delete('coverage');
+  fd.append('coverage',checked||'Not specified');
+
+  try{
+    const r=await fetch('https://formspree.io/f/mzdjvzlo',{
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body:fd
+    });
+    if(r.ok){form.style.display='none';successbox.style.display='block';}
+    else throw new Error();
+  }catch{
+    ferr.textContent='Something went wrong. Please call (843) 633-3464 or try again.';
+    ferr.style.display='block';
+    fsub.textContent='Request My Free Quote →';
+    fsub.disabled=false;
+  }
+});
+</script>
+</body>
+</html>
