@@ -171,8 +171,8 @@ footer { background: #060f1e; padding: 3.5rem 5%; border-top: 1px solid var(--bo
 .flinks a:hover { color: rgba(255,255,255,.5); }
 
 /* ANIMATIONS */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.up { opacity: 1; transform: none; }
+.reveal { opacity: 1; transform: none; }
+
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
 /* RESPONSIVE */
@@ -379,7 +379,7 @@ footer { background: #060f1e; padding: 3.5rem 5%; border-top: 1px solid var(--bo
   <p class="sec-sub reveal" style="margin:0 auto 1.4rem">Fill out the form and an advisor will reach out within 24 hours — no cost, no obligation.</p>
   <div class="cbtn-row reveal">
     <a href="tel:+18436333464" class="btn btn-gold">📞 (843) 633-3464</a>
-    <a href="mailto:homebride.foundation@outlook.com" class="btn btn-outline">✉️ Email Us</a>
+    <a href="/cdn-cgi/l/email-protection#31595e5c5453435855541f575e445f555045585e5f715e44455d5e5e5a1f525e5c" class="btn btn-outline">✉️ Email Us</a>
     <a href="https://calendly.com/myinsuranceplan2013/30min" target="_blank" class="btn btn-outline">📅 Book a Call</a>
   </div>
 
@@ -490,13 +490,13 @@ footer { background: #060f1e; padding: 3.5rem 5%; border-top: 1px solid var(--bo
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Mobile menu
 document.getElementById('ham').addEventListener('click',()=>document.getElementById('mobnav').classList.toggle('open'));
 function closeMob(){document.getElementById('mobnav').classList.remove('open');}
 
 // Scroll reveal
-new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up');}),{threshold:.1})
+document.querySelectorAll(".reveal").forEach(el=>el.classList.add("up")); new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up');}),{threshold:.1})
   .observe||document.querySelectorAll('.reveal').forEach(el=>{
     new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('up');},{threshold:.1}).observe(el);
   });
@@ -538,9 +538,4 @@ form.addEventListener('submit',async e=>{
   fd.append('coverage',checked||'Not specified');
 
   try{
-    const r=await fetch('https://formspree.io/f/mzdjvzlo',{
-      method:'POST',
-      headers:{'Accept':'application/json'},
-      body:fd
-    });
-    if(r.ok){for
+ 
